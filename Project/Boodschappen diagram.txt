@@ -1,0 +1,38 @@
+title Overview
+
+participant View
+participant Controller
+participant Model
+participant Database
+
+activate View
+View->Controller:Input recipe
+activate Controller
+
+Database<--Controller:store recipe in tabel
+Controller<-Database:return succes
+deactivate Controller
+View->Controller:Input discount
+activate Controller
+
+Controller->Database:store discount in table\n
+Controller<-Database:return succes
+deactivate Controller
+
+
+View->Controller:Give recipes with discounts
+activate Controller
+Controller->Database:get recipes with discounts
+Controller<-Database:return recipes with discounts
+Controller->Model:calculate percentages
+activate Model
+Controller<-Model:return percentages
+deactivate Model
+Controller->Model:calculate average discount
+activate Model
+Controller<-Model:return average discount
+deactivate Model
+
+View<-Controller:return recipes + calculations
+deactivate Controller
+
